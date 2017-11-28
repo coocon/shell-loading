@@ -1,0 +1,99 @@
+$color_cover: #f6f7f9;
+$color_bg: #fff;
+$color_item: red;
+
+.loading-item {
+    width: 500px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    box-sizing: border-box;
+    .wrap {
+        position: relative;
+        height: 104px;
+        overflow: hidden;
+        background: $color_bg;
+    }
+
+    .item {
+        background: $color_item;
+        position: absolute;
+    }
+    .loading_1 {
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .loading_2 {
+        left: 70px;
+        height: 6px;
+        width: 88px;
+        top: 8px;
+    }
+    .loading_3 {
+        left: 70px;
+        height: 6px;
+        width: 58px;
+        top: 30px;
+    }
+    .loading_4 {
+        left: 0;
+        top: 62px;
+        height: 6px;
+        width: 410px;
+    }
+    .loading_5 {
+        left: 0;
+        top: 75px;
+        height: 6px;
+        width: 440px;
+    }
+    .loading_6 {
+        left: 0;
+        top: 88px;
+        height: 6px;
+        width: 178px;
+    }
+}
+@keyframes placeHolderShimmer {
+    0% {
+        transform: translateX(-800px);
+    }
+
+    100% {
+        transform: translateX(800px);
+    }
+}
+.shell-loading {
+    .loading-item {
+        .item {
+            background: transparent;
+        }
+    }
+    .wrap {
+        background: $color_cover;
+        &:before {
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-name: placeHolderShimmer;
+            animation-timing-function: linear;
+            background-image: linear-gradient(to right, $color_cover 0%, #e9ebee 20%, $color_cover 40%, $color_cover 100%);
+            background-repeat: no-repeat;
+            background-size: 800px 104px;
+            content: ' ';
+            display: block;
+            height: 100%;
+            position: relative;
+        }
+    }
+    .loading_1 {
+        border: 8px solid $color_bg;
+        width: 56px;
+        height: 56px;
+        left: -8px;
+        top: -8px;
+        background: transparent;
+    }
+}
