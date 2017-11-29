@@ -17,3 +17,4 @@ webpack + es6 开发环境
 
 ### 截图如下
 ![Screenshots](https://github.com/coocon/shell-loading/raw/master/Screenshots/1.gif)
+![Screenshots](./Screenshots/1.gif)
