@@ -20,11 +20,9 @@ $color_item: red;
         position: absolute;
     }
     .loading_1 {
-        left: 0;
-        top: 0;
         width: 40px;
         height: 40px;
-        //border-radius: 50%;
+        border-radius: 50%;
     }
     .loading_2 {
         left: 70px;
@@ -83,7 +81,13 @@ $color_item: red;
             animation-iteration-count: infinite;
             animation-name: placeHolderShimmer;
             animation-timing-function: linear;
-            background-image: linear-gradient(to right, $color_cover 0%, #e9ebee 20%, $color_cover 40%, $color_cover 100%);
+            background-image: linear-gradient(
+                to right,
+                $color_cover 0%,
+                #e9ebee 20%,
+                $color_cover 40%,
+                $color_cover 100%
+            );
             background-repeat: no-repeat;
             background-size: 800px 104px;
             content: ' ';
