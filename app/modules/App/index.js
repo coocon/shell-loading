@@ -41,9 +41,9 @@ class App extends Component {
     render() {
         return (
             <div className="react-app main">
-                <h3>我的react应用</h3>
+                <h3>创建普通的DOM元素并布局</h3>
                 <Loading ref="loading" />
-                <div className="blank">生成loading内容如下：</div>
+                <div className="blank">生成带动画的骨架loading内容如下：</div>
                 <div className="shell-loading loading-item">
                     <div className="wrap" dangerouslySetInnerHTML={this.createMarkup()} />
                 </div>

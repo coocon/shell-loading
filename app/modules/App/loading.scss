@@ -12,7 +12,6 @@ $color_item: red;
         height: 104px;
         overflow: hidden;
         background: $color_bg;
-        border: 1px dashed $color_item;
     }
 
     .item {
@@ -22,7 +21,7 @@ $color_item: red;
     .loading_1 {
         width: 40px;
         height: 40px;
-        border-radius: 50%;
+        //border-radius: 50%;
     }
     .loading_2 {
         left: 70px;
@@ -97,7 +96,6 @@ $color_item: red;
         }
     }
     .loading_1 {
-        border: 8px solid $color_bg;
         width: 56px;
         height: 56px;
         left: -8px;
