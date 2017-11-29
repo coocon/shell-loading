@@ -1,18 +1,24 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
 export default function LoadingCreate(WrappedComponent) {
-
     class LoadingCreate extends Component {
-        componentDidMount() {
-            console.log('moutn')
+        state = {
+            shellDOM: null
         }
-        createShell() {
+        componentDidMount() {
+            console.log('mount')
+            //this.createShell(WrappedComponent)
+        }
+        createShell(WrappedComponent) {
+            let wrapprdNode = ReactDOM.findDOMNode(WrappedComponent);
 
         }
         render() {
+            const elementsTree = super.render();
             return (
                 <div className="shell-loading">
-                    <WrappedComponent {...this.props}/>
+                    <WrappedComponent />
                 </div>
             )
         }
@@ -24,6 +30,3 @@ export default function LoadingCreate(WrappedComponent) {
 function getDisplayName(WrappedComponent) {
     return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
-
-
-

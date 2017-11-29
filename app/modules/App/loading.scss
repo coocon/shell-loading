@@ -12,6 +12,7 @@ $color_item: red;
         height: 104px;
         overflow: hidden;
         background: $color_bg;
+        border: 1px dashed $color_item;
     }
 
     .item {
@@ -23,7 +24,7 @@ $color_item: red;
         top: 0;
         width: 40px;
         height: 40px;
-        border-radius: 50%;
+        //border-radius: 50%;
     }
     .loading_2 {
         left: 70px;
@@ -65,13 +66,16 @@ $color_item: red;
         transform: translateX(800px);
     }
 }
+//骨架loading
 .shell-loading {
-    .loading-item {
-        .item {
-            background: transparent;
-        }
+    .item {
+        background: $color_bg;
+        position: absolute;
     }
     .wrap {
+        position: relative;
+        height: 104px;
+        overflow: hidden;
         background: $color_cover;
         &:before {
             animation-duration: 1s;
