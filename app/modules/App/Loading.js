@@ -6,6 +6,7 @@ export default class Loading extends Component {
         return (
             <div className="loading-item">
                 <div className="wrap">
+                    <div className="item loading_0" />
                     <div className="item loading_1" />
                     <div className="item loading_2" />
                     <div className="item loading_3" />

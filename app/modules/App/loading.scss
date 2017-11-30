@@ -18,19 +18,24 @@ $color_item: red;
         background: $color_item;
         position: absolute;
     }
-    .loading_1 {
+    .loading_0 {
         width: 40px;
         height: 40px;
-        //border-radius: 50%;
+    }
+    .loading_1 {
+        left: 70px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
     }
     .loading_2 {
-        left: 70px;
+        left: 130px;
         height: 6px;
         width: 88px;
         top: 8px;
     }
     .loading_3 {
-        left: 70px;
+        left: 130px;
         height: 6px;
         width: 58px;
         top: 30px;

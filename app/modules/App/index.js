@@ -16,7 +16,6 @@ class App extends Component {
     renderLoading(loading) {
         let wrapprdNode = ReactDOM.findDOMNode(loading);
         const html = analysisDOM(wrapprdNode);
-        console.log(html);
         this.setState({
             html: html
         });
@@ -64,6 +63,16 @@ class Rect {
         this.height = height;
     }
 }
+//本质也是一个盒子，只是通过css显示出圆形
+class CircleRect extends Rect {
+    //√￣2
+    //方形的外接圆半径是 width/2 * 1.414
+    constructor(x, y, width, height) {
+        super(x, y, width, height);
+        this.radius = Math.ceil(width / 2 * 1.414);
+    }
+}
+
 
 /**
  * 判断两个矩形是否有重叠
@@ -94,7 +103,6 @@ function splitRects(resRects, arrRects) {
         //逐个获取需要拆分的rect，并对rc2元素进行处理
         let rc1 = resRects[i];
         let arr = splitRect(rc1, rc2);
-        console.log(arr);
         resRectsV2 = resRectsV2.concat(arr);
     }
     return splitRects(resRectsV2, arrRects);
@@ -152,13 +160,43 @@ function splitRect(rc1, rc2) {
 function renderRects(arrRects) {
     var htmls = [];
     arrRects.forEach(item => {
-        const { x, y, width, height } = item;
+        console.log(item)
+        const { x, y, width, height, radius} = item;
         let ele = `<div class="item" style="left:${x}px;top:${y}px;width:${width}px;height:${height}px"></div>`;
+        if (radius > width / 2) {
+            let r = radius - width / 2;
+            ele = `<div class="item" style="left:${x - r}px;top:${y - r}px;width:${width + r * 2}px;height:${height + r * 2}px;
+            background:transparent;border:${r}px solid #fff;border-radius:50%"></div>`;
+        }
+
         htmls.push(ele);
     });
     return htmls.join('\n');
 }
 
+/**
+ * 根据css的盒模型，认为所有元素都是矩形，但是设计中有些圆形的元素（border-radius:50%)，需要覆盖到该位置
+ * 实际是生成一个背景是透明(transparent)的border颜色是背景颜色的该矩形的外接圆
+ */
+function getFillCirleRects(cssBoxRects) {
+    let res = [];
+    cssBoxRects.forEach(item => {
+        console.log(item)
+        if (item instanceof CircleRect) {
+            res.push(item);
+        }
+    })
+    return res;
+
+}
+//可以通过class，也可以通过计算样式
+function isCircle(ele) {
+    let value = window.getComputedStyle(ele).borderRadius;
+    if (value === '50%') {
+        return true;
+    }
+    return false
+}
 /**
  * 根据一个dom节点，生成反向loading的dom结构
  */
@@ -168,18 +206,25 @@ function analysisDOM(domNode) {
     //外层矩形宽度和高度
     let { offsetWidth, offsetHeight } = wrapNode;
     let mainRect = new Rect(0, 0, offsetWidth, offsetHeight);
-    let arrRects = [];
+    let cssBoxRects = [];
 
     //绝对定位的元素
     for (let i = 0, len = wrapNode.childNodes.length; i < len; i++) {
         let item = wrapNode.childNodes[i];
         const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = item;
-        arrRects.push(new Rect(offsetLeft, offsetTop, offsetWidth, offsetHeight));
+        //判断是否是圆形
+        if (isCircle(item)) {
+            cssBoxRects.push(new CircleRect(offsetLeft, offsetTop, offsetWidth, offsetHeight));
+        }
+        else {
+            cssBoxRects.push(new Rect(offsetLeft, offsetTop, offsetWidth, offsetHeight));
+        }
     }
-
+    let fillRects = getFillCirleRects(cssBoxRects);
     //被分割矩形
-    let resRects = splitRects([mainRect], arrRects);
+    let resRects = splitRects([mainRect], cssBoxRects);
+    
+    resRects = resRects.concat(fillRects);
     let html = renderRects(resRects);
     return html;
-    console.log(mainRect, arrRects, resRects);
 }
