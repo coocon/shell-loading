@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import FeedBack from 'components/FeedBack';
 import './style.scss';
 import Loading from './Loading';
-import LoadingHOC from 'components/LoadingHOC';
-import catImg from 'static/images/cat.jpg';
 import {Rect, CircleRect} from './BaseClass';
 
 class App extends Component {

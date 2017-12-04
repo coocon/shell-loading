@@ -1,3 +1,5 @@
+import {Rect, CircleRect} from './BaseClass';
+
 /**
  * 判断两个矩形是否有重叠
  * @param {Rect} rc1 矩形1
@@ -19,7 +21,7 @@ export function isOverlap(rc1, rc2) {
 /**
  * rc1 递归分割 rc2
  * @param {Array<Rect>} resRects 需要被切分的数据组矩形
- * @param {Array<Rect>} arrRects 数组矩形
+ * @param {Array<Rect>} arrRects 数组矩形，存放多个障碍元素
  * @return {Array<Rect>} 返回
  */
 function splitRects(resRects, arrRects) {
@@ -154,7 +156,6 @@ function analysisDOM(domNode) {
     let fillRects = getFillCirleRects(cssBoxRects);
     //被分割矩形
     let resRects = splitRects([mainRect], cssBoxRects);
-    
     resRects = resRects.concat(fillRects);
     let html = renderRects(resRects);
     return html;
